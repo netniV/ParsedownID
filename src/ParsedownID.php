@@ -1,6 +1,4 @@
 <?php
-namespace App\Functions;
-
 // Written by Mark Brugnoli-Vinten (netniV) @ BV IT Solutions Ltd
 class ParsedownID extends \ParsedownExtra {
 	protected function inlineImage($excerpt) {
