@@ -1,12 +1,25 @@
 <?php
 // Written by Mark Brugnoli-Vinten (netniV) @ BV IT Solutions Ltd
 class ParsedownID extends \ParsedownExtra {
+	private $imageUrlPrefix;
+
+	function setImageUrlPrefix(?string $url) {
+		$this->imageUrlPrefix = $url ?? '';
+	}
+
+	function getImageUrlPrefix() {
+		return $this->imageUrlPrefix;
+	}
+
 	protected function inlineImage($excerpt) {
 		$image = parent::inlineImage($excerpt);
 
 		if (isset($image)) {
 			$src = isset($image['element']['attributes']['class']) ? $image['element']['attributes']['class'] : '';
 			$image['element']['attributes']['class'] = trim('markdownImage ' . $src);
+
+			$src = $image['element']['attributes']['src'] ?? '';
+			$image['element']['attributes']['src'] = trim($this->imageUrlPrefix . $src);
 		} else {
 			$image = null;
 		}
